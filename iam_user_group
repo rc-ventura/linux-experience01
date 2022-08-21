@@ -1,0 +1,88 @@
+#!/bin/bash
+
+echo "Criando diretórios..."
+
+mkdir /adm
+mkdir /development
+mkdir /vendas
+mkdir /rh
+mkdir /publico
+
+echo "Criando grupos de usuários..."
+
+groupadd GRP_ADM
+groupadd GRP_DEV
+groupadd GRP_VENDAS
+groupadd GRP_RH
+
+echo " Criando os usuários..."
+
+useradd carlos_user1  -m -s /bin/bash -p $(openssl passwd -6 senha123) -G GRP_ADM
+useradd maria_user2  -m -s /bin/bash -p $(openssl passwd -6 senha123)  -G GRP_ADM
+useradd joao_user3  -m -s /bin/bash -p $(openssl passwd -6 senha123)  -G GRP_ADM
+
+
+useradd rafaela_user4  -m -s /bin/bash -p $(openssl passwd -6 senha123) -G GRP_DEV
+useradd amanda_user5  -m -s /bin/bash -p $(openssl passwd -6 senha123) -G GRP_DEV
+useradd josefina_user6  -m -s /bin/bash -p $(openssl passwd -6 senha123) -G GRP_DEV
+
+useradd daniel_user7  -m -s /bin/bash -p $(openssl passwd -6 senha123) -G GRP_VENDAS
+useradd cassiana_user8  -m -s /bin/bash -p $(openssl passwd -6 senha123) -G GRP_VENDAS
+useradd guilherme_user9  -m -s /bin/bash -p $(openssl passwd -6 senha123) -G GRP_VENDAS
+
+useradd henrique_user10  -m -s /bin/bash -p $(openssl passwd -6 senha123) -G GRP_RH
+useradd ana_user11  -m -s /bin/bash -p $(openssl passwd -6 senha123) -G GRP_RH
+useradd laura_user12  -m -s /bin/bash -p $(openssl passwd -6 senha123) -G GRP_RH
+
+
+echo " Gerenciamento de contas e senhas dos usuaŕios ..."
+
+chage  --lastday 0  --mindays 30 --maxdays 90 -E 2022-12-08 carlos_user1
+chage  --lastday 0  --mindays 30 --maxdays 90 -E 2022-12-08 maria_user2
+chage  --lastday 0  --mindays 30 --maxdays 90 -E 2022-12-08 joao_user3
+
+chage  --lastday 0  --mindays 30 --maxdays 90 -E 2022-12-08 rafaela_user4
+chage  --lastday 0  --mindays 30 --maxdays 90 -E 2022-12-08 amanda_user5
+chage  --lastday 0  --mindays 30 --maxdays 90 -E 2022-12-08 josefina_user6
+
+chage  --lastday 0  --mindays 30 --maxdays 90 -E 2022-12-08 daniel_user7
+chage  --lastday 0  --mindays 30 --maxdays 90 -E 2022-12-08 cassiana_user8
+chage  --lastday 0  --mindays 30 --maxdays 90 -E 2022-12-08 guilherme_user9
+
+chage  --lastday 0  --mindays 30 --maxdays 90 -E 2022-12-08 henrique_user10
+chage  --lastday 0  --mindays 30 --maxdays 90 -E 2022-12-08 ana_user11
+chage  --lastday 0  --mindays 30 --maxdays 90 -E 2022-12-08 laura_user12
+
+
+# -E  (--expiredate) 
+
+
+echo  "Especificando permissões dos diretórios..."
+
+chown root:GRP_ADM /adm
+chown root:GRP_DEV /development
+chown root:GRP_VENDAS /vendas
+chown root:GRP_RH /rh
+
+chmod 770 /adm
+chmod 770 /development
+chmod 770 /vendas
+chmod 770 /rh
+chmod 777 /publico
+
+
+echo " Checagem do script"
+
+cat /etc/passwd
+cat /etc/group          
+cd / 
+ls -l                  
+chage -l carlos_user1  
+
+
+echo "Procedimento finalizado..."
+
+
+
+
+
